@@ -19,7 +19,8 @@ Before:
 After:
 ![Image](https://github.com/user-attachments/assets/1125e1a9-edf7-4907-8aa5-406c85dedb44)
 
-Install:
+# Installing it to your Discord
+
 Use [Vencord](https://github.com/Vendicated/Vencord) or an equivalent client mod that allows you to install themes.
 
 Paste the following link into your online theme links:
@@ -27,17 +28,22 @@ Paste the following link into your online theme links:
 https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css
 ```
 
-Or paste this into your QuickCSS (Or any non-Vencord equivalent) to make it a little easier:
+### Other method 
+Paste this into your QuickCSS (Or any non-Vencord equivalent) to make it a little easier:
+> [!NOTE]
+> Must be at the top of your code, @import does not work otherwise - this is for all the @import code you might have - put it to the top!  
 ```
 /* Change visual refresh title bar */
 @import url('https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css');
 ```
 
+### Important Notice
 **If you are on a browser, Vesktop, or a client which does not come with window controls, this fork is not aimed at you**
 
-Alternatively if your client does not support online themes you can download one of the theme files found in this repository and put them into your theme folder.
+Alternatively if your client does not support online themes you can download the theme file found in this repository and put it into your theme folder.
 
-## Config
+# Configuration
+
 Put this into your QuickCSS (Or any non-Vencord equivalent) to configure some behavior of this theme:
 ```css
 /* Change visual refresh title bar */
