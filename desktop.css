@@ -1,8 +1,9 @@
 .visual-refresh {
     --vr-header-snippet-top: 0px;
-    --vr-header-snippet-server-padding: 16px;
+    --vr-header-snippet-server-padding: 0px;
     --vr-header-snippet-space: 230px;
     --vr-header-snippet-button-padding: 0;
+    --vr-top-spacing: 20px;
 
     div.chat_f75fb0,
     div.subtitleContainer_f75fb0,
@@ -24,7 +25,7 @@
     }
 
     div.base_c48ade {
-        grid-template-rows: [top] 0 [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
+        grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
 
         &:has(
                 div.bar_c38106
@@ -74,6 +75,7 @@
             background: none;
             border: none;
             height: var(--custom-channel-header-height);
+            top: var(--vr-top-spacing);
         }
 
         &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0)
