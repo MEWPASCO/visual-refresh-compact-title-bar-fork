@@ -101,4 +101,9 @@
     div.topic__6ec1a {
         -webkit-app-region: no-drag;
     }
+    
+    div.searchBar__1ac1c {
+      position: relative;
+      right: 220px;
+    }
 }
