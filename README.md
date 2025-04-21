@@ -27,6 +27,12 @@ Paste the following link into your online theme links:
 https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css
 ```
 
+Or paste this into your QuickCSS (Or any non-Vencord equivalent) to make it a little easier:
+```
+/* Change visual refresh title bar */
+@import url('https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css');
+```
+
 **If you are on a browser, Vesktop, or a client which does not come with window controls, this fork is not aimed at you**
 
 Alternatively if your client does not support online themes you can download one of the theme files found in this repository and put them into your theme folder.
@@ -34,6 +40,7 @@ Alternatively if your client does not support online themes you can download one
 ## Config
 Put this into your QuickCSS (Or any non-Vencord equivalent) to configure some behavior of this theme:
 ```css
+/* Change visual refresh title bar */
 :root {
     /* controls the vertical position of the window buttons */
     --vr-header-snippet-top: 0px !important;
