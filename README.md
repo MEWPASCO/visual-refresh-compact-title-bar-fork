@@ -1,3 +1,10 @@
+> [!CAUTION]
+> # ⚠️ **Disclaimer**  
+> This is **not my original project**.  
+> It is a **fork** of [visual-refresh-compact-title-bar](https://github.com/surgedevs/visual-refresh-compact-title-bar) with personal customizations.  
+> All credit goes to the original creator(s).
+
+
 # Visual Refresh Compact Title Bar
 
 The new Discord theme (also called, and from now on referred to as Visual Refresh) changed the window title bar to be more fat, now also including your inbox, help, and the update button.
