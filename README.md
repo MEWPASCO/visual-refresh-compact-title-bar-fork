@@ -4,6 +4,9 @@
 > It is a **fork** of [visual-refresh-compact-title-bar](https://github.com/surgedevs/visual-refresh-compact-title-bar) with personal customizations.  
 > All credit goes to the original creator(s).
 
+# Contact me through Discord
+
+[![Discord](https://img.shields.io/discord/1196075698301968455?style=social&logo=discord&label=ΛVΛRIΛ)](https://discord.gg/avia)
 
 # Visual Refresh Compact Title Bar
 
