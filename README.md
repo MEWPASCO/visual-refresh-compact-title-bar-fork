@@ -11,10 +11,10 @@ The new Discord theme (also called, and from now on referred to as Visual Refres
 This theme aims to move the buttons from the title bar down into the channel header and remove the title in the middle, but still give you a small bar that you can grab the discord window on to move it around (people had issues with that):
 
 Before:
-![image](https://github.com/user-attachments/assets/4fd945aa-b31f-4f56-9e67-099efc8b8630)
+![Image](https://github.com/user-attachments/assets/c914bde7-97a6-49b4-a3fb-a8bd5ef20c3c)
 
 After:
-![image](https://github.com/user-attachments/assets/1a0a3718-dc30-411f-9404-579f5ed65509)
+![Image](https://github.com/user-attachments/assets/1125e1a9-edf7-4907-8aa5-406c85dedb44)
 
 Install:
 Use [Vencord](https://github.com/Vendicated/Vencord) or an equivalent client mod that allows you to install themes.
