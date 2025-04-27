@@ -119,6 +119,6 @@
 
     /* Update: Fix the trailing moving downwards when notice appears */
     div.base_c48ade:has(> .notice__6e2b9) {
-        --vr-top-spacing: 48px;
+        --vr-top-spacing: 0px !important;
     }
 }
