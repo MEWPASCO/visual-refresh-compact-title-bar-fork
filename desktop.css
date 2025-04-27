@@ -1,20 +1,22 @@
 /**
  * @name Visual Refresh Compact Title Bar
  * @author Wolfÿ
- * @version 1.1.0
+ * @version 1.1.2
  * @description A Discord theme to compact the new visual refresh title bar
  * @invite avia
  * @source https://github.com/MEWPASCO/rainbowglow-avatars
  * @website https://www.avariaxyz.win/
  */
 
-.visual-refresh {
+ .visual-refresh {
+    /* === VARIABLES === */
     --vr-header-snippet-top: 0px;
     --vr-header-snippet-server-padding: 0px;
     --vr-header-snippet-space: 230px;
     --vr-header-snippet-button-padding: 0;
     --vr-top-spacing: 20px;
 
+    /* === CHAT PADDING ADJUSTMENT === */
     div.chat_f75fb0,
     div.subtitleContainer_f75fb0,
     main.container__133bf,
@@ -24,6 +26,7 @@
         }
     }
 
+    /* === PAGE ANCHOR SETUP === */
     div.page_c48ade {
         &:not(:has(> div.chat_f75fb0)) {
             anchor-name: --vr-header-snippet;
@@ -34,14 +37,12 @@
         }
     }
 
+    /* === BASE STRUCTURE ADJUSTMENTS === */
     div.base_c48ade {
         grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
 
-        &:has(
-                div.bar_c38106
-                    > div.trailing_c38106
-                    .updateIconForeground__49676
-            ) {
+        /* If update icon exists (like a Discord client update available) */
+        &:has(div.bar_c38106 > div.trailing_c38106 .updateIconForeground__49676) {
             & div.chat_f75fb0,
             & div.subtitleContainer_f75fb0,
             & main.container__133bf,
@@ -52,16 +53,16 @@
             }
 
             & div.videoControls_bfe55a .topControls_bfe55a div.toolbar__9293f {
-                margin-right: calc(
-                    var(--vr-header-snippet-space) + 30px
-                ) !important;
+                margin-right: calc(var(--vr-header-snippet-space) + 30px) !important;
             }
         }
 
+        /* Content Layer */
         & > div.content_c48ade {
             z-index: 0;
         }
 
+        /* Top Title Bar */
         & > div.bar_c38106 {
             position: absolute;
             position-anchor: --vr-header-snippet;
@@ -75,12 +76,14 @@
             }
         }
 
+        /* Adjust Top Bar when Notice Appears */
         &:has(> .notice__6e2b9) {
             & > div.bar_c38106 {
                 top: anchor(top);
             }
         }
 
+        /* Trailing Buttons Styling (Inbox, Help) */
         & div.trailing_c38106 {
             background: none;
             border: none;
@@ -88,36 +91,37 @@
             top: var(--vr-top-spacing);
         }
 
-        &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0)
-            > .bar_c38106 {
+        /* Lower z-index if thread sidebar is open */
+        &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0) > .bar_c38106 {
             z-index: 0;
         }
     }
 
-    :not(:has(div.page_c48ade > div.chat_f75fb0))
-        div.base_c48ade
-        > div.bar_c38106 {
+    /* === FALLBACKS === */
+    /* If no chat exists (e.g., friends tab), adjust title bar positioning */
+    :not(:has(div.page_c48ade > div.chat_f75fb0)) div.base_c48ade > div.bar_c38106 {
         right: 0 !important;
     }
 
-    ul[data-list-id="guildsnav"]
-        > div.itemsContainer_ef3116
-        > div.stack_dbd263 {
+    /* Adjust server list top margin */
+    ul[data-list-id="guildsnav"] > div.itemsContainer_ef3116 > div.stack_dbd263 {
         margin-top: var(--vr-header-snippet-server-padding);
     }
 
+    /* Disable drag on toolbar/video controls/topic */
     & div.videoControls_bfe55a .topControls_bfe55a,
     section.header__0b563 div.toolbar__9293f,
     div.topic__6ec1a {
         -webkit-app-region: no-drag;
     }
-    
+
+    /* Move search bar to fit new layout */
     div.searchBar__1ac1c {
-      position: relative;
-      right: 220px;
+        position: relative;
+        right: 220px;
     }
 
-    /* Update: Fix the trailing moving downwards when notice appears */
+    /* === UPDATE: Fix top bar size when notice appears === */
     div.base_c48ade:has(> .notice__6e2b9) {
         --vr-top-spacing: 0px !important;
     }
