@@ -116,4 +116,9 @@
       position: relative;
       right: 220px;
     }
+
+    /* Update: Fix the trailing moving downwards when notice appears */
+    div.base_c48ade:has(> .notice__6e2b9) div.trailing_c38106 {
+        top: var(--vr-top-spacing);
+    }
 }
