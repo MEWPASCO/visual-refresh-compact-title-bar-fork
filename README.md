@@ -48,8 +48,14 @@ Put this into your QuickCSS (Or any non-Vencord equivalent) to configure some be
 ```css
 /* Change visual refresh title bar */
 :root {
+    /* controls the vertical position of the window buttons */
+    --vr-header-snippet-top: 0px !important;
+    /* controls the space above the server list */
+    --vr-header-snippet-server-padding: 0px !important;
     /* controls the space the window buttons get on the channel header, experiment around with this if you get gaps or the buttons overlap! */
     --vr-header-snippet-space: 220px !important;
+    /* controls the space to the right of the window buttons, good if you are using themes like midnight which add padding to the bar */
+    --vr-header-snippet-button-padding: 0 !important;
     /* controls the space that you'd like to have on the top bar - increase/decrease bar size and move windows controls with it at the same time */
     --vr-top-spacing: 20px !important;
 }
