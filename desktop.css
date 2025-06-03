@@ -9,7 +9,7 @@
  */
 
 .visual-refresh {
-    --vr-header-snippet-space: 230px;
+    --vr-header-snippet-space: 220px;
     --vr-top-spacing: 20px;
 
     /* === Adjust Chat Right Padding === */
