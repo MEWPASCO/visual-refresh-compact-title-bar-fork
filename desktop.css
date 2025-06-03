@@ -1,7 +1,7 @@
 /**
  * @name Visual Refresh Compact Title Bar
  * @author Wolfÿ
- * @version 1.1.2
+ * @version 1.1.3-Alpha
  * @description A Discord theme to compact the new visual refresh title bar
  * @invite avia
  * @source https://github.com/MEWPASCO/rainbowglow-avatars
@@ -9,120 +9,85 @@
  */
 
  .visual-refresh {
-    /* === VARIABLES === */
-    --vr-header-snippet-top: 0px;
-    --vr-header-snippet-server-padding: 0px;
-    --vr-header-snippet-space: 230px;
-    --vr-header-snippet-button-padding: 0;
-    --vr-top-spacing: 20px;
+  /* === VARIABLES === */
+  --vr-header-snippet-space: 230px;
+  --vr-top-spacing: 20px;
 
-    /* === CHAT PADDING ADJUSTMENT === */
-    div.chat_f75fb0,
-    div.subtitleContainer_f75fb0,
-    main.container__133bf,
-    div.chatLayerWrapper__01ae2 {
-        & section.container__9293f {
-            padding-right: var(--vr-header-snippet-space);
-        }
+  /* === CHAT PADDING === */
+  .chat_f75fb0 section.container__9293f,
+  .subtitleContainer_f75fb0 section.container__9293f,
+  .container__133bf section.container__9293f,
+  .chatLayerWrapper__01ae2 section.container__9293f {
+    padding-right: var(--vr-header-snippet-space);
+  }
+
+  /* === BASE STRUCTURE === */
+  .base_c48ade {
+    display: grid;
+    grid-template-rows: var(--vr-top-spacing) min-content auto min-content;
+
+    > .bar_c38106 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      padding: 0;
+      z-index: 1;
     }
 
-    /* === PAGE ANCHOR SETUP === */
-    div.page_c48ade {
-        &:not(:has(> div.chat_f75fb0)) {
-            anchor-name: --vr-header-snippet;
-        }
-
-        & > div.chat_f75fb0 {
-            anchor-name: --vr-header-snippet;
-        }
+    > .content_c48ade {
+      z-index: 0;
     }
 
-    /* === BASE STRUCTURE ADJUSTMENTS === */
-    div.base_c48ade {
-        grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
-
-        /* If update icon exists (like a Discord client update available) */
-        &:has(div.bar_c38106 > div.trailing_c38106 .updateIconForeground__49676) {
-            & div.chat_f75fb0,
-            & div.subtitleContainer_f75fb0,
-            & main.container__133bf,
-            & div.chatLayerWrapper__01ae2 {
-                & section.container__9293f {
-                    padding-right: calc(var(--vr-header-snippet-space) + 50px);
-                }
-            }
-
-            & div.videoControls_bfe55a .topControls_bfe55a div.toolbar__9293f {
-                margin-right: calc(var(--vr-header-snippet-space) + 30px) !important;
-            }
-        }
-
-        /* Content Layer */
-        & > div.content_c48ade {
-            z-index: 0;
-        }
-
-        /* Top Title Bar */
-        & > div.bar_c38106 {
-            position: absolute;
-            position-anchor: --vr-header-snippet;
-            top: var(--vr-header-snippet-top);
-            right: anchor(right);
-            width: anchor-size(width);
-            padding: 0 var(--vr-header-snippet-button-padding) 0 0;
-
-            & > .title_c38106 {
-                display: none;
-            }
-        }
-
-        /* Adjust Top Bar when Notice Appears */
-        &:has(> .notice__6e2b9) {
-            & > div.bar_c38106 {
-                top: anchor(top);
-            }
-        }
-
-        /* Trailing Buttons Styling (Inbox, Help) */
-        & div.trailing_c38106 {
-            background: none;
-            border: none;
-            height: var(--custom-channel-header-height);
-            top: var(--vr-top-spacing);
-        }
-
-        /* Lower z-index if thread sidebar is open */
-        &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0) > .bar_c38106 {
-            z-index: 0;
-        }
+    /* Hide title text */
+    .title_c38106 {
+      display: none;
     }
 
-    /* === FALLBACKS === */
-    /* If no chat exists (e.g., friends tab), adjust title bar positioning */
-    :not(:has(div.page_c48ade > div.chat_f75fb0)) div.base_c48ade > div.bar_c38106 {
-        right: 0 !important;
+    .trailing_c38106 {
+      background: none;
+      border: none;
+      height: var(--custom-channel-header-height, 48px);
+      top: var(--vr-top-spacing);
     }
 
-    /* Adjust server list top margin */
-    ul[data-list-id="guildsnav"] > div.itemsContainer_ef3116 > div.stack_dbd263 {
-        margin-top: var(--vr-header-snippet-server-padding);
+    /* If thread sidebar is open, reduce z-index of top bar */
+    .threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0 ~ .bar_c38106 {
+      z-index: 0;
+    }
+  }
+
+  /* === VIDEO CONTROLS / TOOLBARS / TOPICS === */
+  .videoControls_bfe55a .topControls_bfe55a,
+  .toolbar__9293f,
+  .topic__6ec1a {
+    -webkit-app-region: no-drag;
+  }
+
+  /* === SEARCH BAR POSITIONING === */
+  .searchBar__1ac1c {
+    position: relative;
+    right: 220px;
+  }
+
+  /* === SERVER LIST MARGIN === */
+  ul[data-list-id="guildsnav"] .itemsContainer_ef3116 .stack_dbd263 {
+    margin-top: 0;
+  }
+
+  /* === NOTICE ADJUSTMENT === */
+  .base_c48ade > .notice__6e2b9 + .bar_c38106 {
+    top: 0;
+  }
+
+  /* === UPDATE ICON EXTRA SPACING === */
+  .bar_c38106 .updateIconForeground__49676 {
+    ~ .trailing_c38106 {
+      margin-right: 50px !important;
     }
 
-    /* Disable drag on toolbar/video controls/topic */
-    & div.videoControls_bfe55a .topControls_bfe55a,
-    section.header__0b563 div.toolbar__9293f,
-    div.topic__6ec1a {
-        -webkit-app-region: no-drag;
+    .videoControls_bfe55a .toolbar__9293f {
+      margin-right: 30px !important;
     }
-
-    /* Move search bar to fit new layout */
-    div.searchBar__1ac1c {
-        position: relative;
-        right: 220px;
-    }
-
-    /* === UPDATE: Fix top bar size when notice appears === */
-    div.base_c48ade:has(> .notice__6e2b9) {
-        --vr-top-spacing: 0px !important;
-    }
+  }
 }
