@@ -25,7 +25,7 @@ Use [Vencord](https://github.com/Vendicated/Vencord) or an equivalent client mod
 
 Paste the following link into your online theme links:
 ```
-https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css
+https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/main/desktop.css
 ```
 
 ### Other method 
@@ -34,7 +34,7 @@ Paste this into your QuickCSS (Or any non-Vencord equivalent) to make it a littl
 > Must be at the top of your code, @import does not work otherwise - this is for all the @import code you might have - put it to the top!  
 ```
 /* Change visual refresh title bar */
-@import url('https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/refs/heads/main/desktop.css');
+@import url('https://raw.githubusercontent.com/MEWPASCO/visual-refresh-compact-title-bar-fork/main/desktop.css');
 ```
 
 ### Important Notice
