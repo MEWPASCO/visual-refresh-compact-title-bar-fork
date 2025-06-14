@@ -118,7 +118,7 @@
     /* Move search bar to fit new layout */
     div.searchBar__1ac1c {
         position: relative;
-        right: 220px;
+        right: var(--vr-header-snippet-space);
     }
 
     /* === UPDATE: Fix top bar size when notice appears === */
