@@ -61,7 +61,7 @@ Put this into your QuickCSS (Or any non-Vencord equivalent) to configure some be
 }
 ```
 ### --vr-header-snippet-space cheat sheet
-Try these if you dont want to find out the spacing yourself!
+Try these if you don't want to find out the spacing yourself!
 
 - Desktop Default: 180px
 - Desktop Spacious UI Scaling: 200px
