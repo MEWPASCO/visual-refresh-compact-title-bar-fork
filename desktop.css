@@ -27,7 +27,7 @@
     }
 
     /* === PAGE ANCHOR SETUP === */
-    div.page_c48ade {
+    div.page__5e434 {
         &:not(:has(> div.chat_f75fb0)) {
             anchor-name: --vr-header-snippet;
         }
@@ -38,7 +38,7 @@
     }
 
     /* === BASE STRUCTURE ADJUSTMENTS === */
-    div.base_c48ade {
+    div.base__5e434 {
         grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
 
         /* If update icon exists (like a Discord client update available) */
@@ -58,7 +58,7 @@
         }
 
         /* Content Layer */
-        & > div.content_c48ade {
+        & > div.content__5e434 {
             z-index: 0;
         }
 
@@ -99,7 +99,7 @@
 
     /* === FALLBACKS === */
     /* If no chat exists (e.g., friends tab), adjust title bar positioning */
-    :not(:has(div.page_c48ade > div.chat_f75fb0)) div.base_c48ade > div.bar_c38106 {
+    :not(:has(div.page__5e434 > div.chat_f75fb0)) div.base__5e434 > div.bar_c38106 {
         right: 0 !important;
     }
 
@@ -122,7 +122,7 @@
     }
 
     /* === UPDATE: Fix top bar size when notice appears === */
-    div.base_c48ade:has(> .notice__6e2b9) {
+    div.base__5e434:has(> .notice__6e2b9) {
         --vr-top-spacing: 0px !important;
     }
 }
