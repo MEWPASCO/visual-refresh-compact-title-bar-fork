@@ -17,53 +17,53 @@
     --vr-top-spacing: 20px;
 
     /* === CHAT PADDING ADJUSTMENT === */
-    div.f75fb00fb7356cbe-chat,
-    div.f75fb00fb7356cbe-subtitleContainer,
-    main._133bf5eea8e33a34-container,
-    div._01ae244280823725-chatLayerWrapper {
-        & section._9293f6b2fc12398a-container {
+    div.chat_f75fb0,
+    div.subtitleContainer_f75fb0,
+    main.container__133bf,
+    div.chatLayerWrapper__01ae2 {
+        & section.container__9293f {
             padding-right: var(--vr-header-snippet-space);
         }
     }
 
     /* === PAGE ANCHOR SETUP === */
-    div._5e434347c823b592-page {
-        &:not(:has(> div.f75fb00fb7356cbe-chat)) {
+    div.page__5e434 {
+        &:not(:has(> div.chat_f75fb0)) {
             anchor-name: --vr-header-snippet;
         }
 
-        & > div.f75fb00fb7356cbe-chat {
+        & > div.chat_f75fb0 {
             anchor-name: --vr-header-snippet;
         }
     }
 
     /* === BASE STRUCTURE ADJUSTMENTS === */
-    div._5e434347c823b592-base {
+    div.base__5e434 {
         grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
 
         /* If update icon exists (like a Discord client update available) */
-        &:has(div.c38106a3f0c3ca76-bar > div.c38106a3f0c3ca76-trailing ._496769951eb140fe-updateIconForeground) {
-            & div.f75fb00fb7356cbe-chat,
-            & div.f75fb00fb7356cbe-subtitleContainer,
-            & main._133bf5eea8e33a34-container,
-            & div._01ae244280823725-chatLayerWrapper {
-                & section._9293f6b2fc12398a-container {
+        &:has(div.bar_c38106 > div.trailing_c38106 .updateIconForeground__49676) {
+            & div.chat_f75fb0,
+            & div.subtitleContainer_f75fb0,
+            & main.container__133bf,
+            & div.chatLayerWrapper__01ae2 {
+                & section.container__9293f {
                     padding-right: calc(var(--vr-header-snippet-space) + 50px);
                 }
             }
 
-            & div.bfe55a0aaaf62375-videoControls .bfe55a0aaaf62375-topControls div._9293f6b2fc12398a-toolbar {
+            & div.videoControls_bfe55a .topControls_bfe55a div.toolbar__9293f {
                 margin-right: calc(var(--vr-header-snippet-space) + 30px) !important;
             }
         }
 
         /* Content Layer */
-        & > div._5e434347c823b592-content {
+        & > div.content__5e434 {
             z-index: 0;
         }
 
         /* Top Title Bar */
-        & > div.c38106a3f0c3ca76-bar {
+        & > div.bar_c38106 {
             position: absolute;
             position-anchor: --vr-header-snippet;
             top: var(--vr-header-snippet-top);
@@ -71,20 +71,20 @@
             width: anchor-size(width);
             padding: 0 var(--vr-header-snippet-button-padding) 0 0;
 
-            & > .c38106a3f0c3ca76-title {
+            & > .title_c38106 {
                 display: none;
             }
         }
 
         /* Adjust Top Bar when Notice Appears */
-        &:has(> ._6e2b9359c6f84cfd-notice) {
-            & > div.c38106a3f0c3ca76-bar {
+        &:has(> .notice__6e2b9) {
+            & > div.bar_c38106 {
                 top: anchor(top);
             }
         }
 
         /* Trailing Buttons Styling (Inbox, Help) */
-        & div.c38106a3f0c3ca76-trailing {
+        & div.trailing_c38106 {
             background: none;
             border: none;
             height: var(--custom-channel-header-height);
@@ -92,37 +92,37 @@
         }
 
         /* Lower z-index if thread sidebar is open */
-        &:has(.f75fb00fb7356cbe-threadSidebarOpen.f75fb00fb7356cbe-threadSidebarFloating) > .c38106a3f0c3ca76-bar {
+        &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0) > .bar_c38106 {
             z-index: 0;
         }
     }
 
     /* === FALLBACKS === */
     /* If no chat exists (e.g., friends tab), adjust title bar positioning */
-    :not(:has(div._5e434347c823b592-page > div.f75fb00fb7356cbe-chat)) div._5e434347c823b592-base > div.c38106a3f0c3ca76-bar {
+    :not(:has(div.page__5e434 > div.chat_f75fb0)) div.base__5e434 > div.bar_c38106 {
         right: 0 !important;
     }
 
     /* Adjust server list top margin */
-    ul[data-list-id="guildsnav"] > div.ef3116c2da186559-itemsContainer > div.dbd2630aec71879b-stack {
+    ul[data-list-id="guildsnav"] > div.itemsContainer_ef3116 > div.stack_dbd263 {
         margin-top: var(--vr-header-snippet-server-padding);
     }
 
     /* Disable drag on toolbar/video controls/topic */
-    & div.bfe55a0aaaf62375-videoControls .bfe55a0aaaf62375-topControls,
-    section._0b56311ebc6682e2-header div._9293f6b2fc12398a-toolbar,
-    div._6ec1a06139ec3b27-topic {
+    & div.videoControls_bfe55a .topControls_bfe55a,
+    section.header__0b563 div.toolbar__9293f,
+    div.topic__6ec1a {
         -webkit-app-region: no-drag;
     }
 
     /* Move search bar to fit new layout */
-    div._1ac1c54c56e5807c-searchBar {
+    div.searchBar__1ac1c {
         position: relative;
         right: var(--vr-header-snippet-space);
     }
 
     /* === UPDATE: Fix top bar size when notice appears === */
-    div._5e434347c823b592-base:has(> ._6e2b9359c6f84cfd-notice) {
+    div.base__5e434:has(> .notice__6e2b9) {
         --vr-top-spacing: 0px !important;
     }
 }
