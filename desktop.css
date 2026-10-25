@@ -1,14 +1,42 @@
 /**
  * @name Visual Refresh Compact Title Bar
  * @author Wolfÿ
- * @version 1.1.3-Alpha
+ * @version 1.1.4-Alpha
  * @description A Discord theme to compact the new visual refresh title bar
  * @invite avia
- * @source https://github.com/MEWPASCO/rainbowglow-avatars
+ * @source https://github.com/MEWPASCO/visual-refresh-compact-title-bar-fork
  * @website https://www.avariaxyz.win/
  */
 
- .visual-refresh {
+/*
+ * Fork of https://github.com/chloecinders/visual-refresh-compact-title-bar
+ * with personal customizations. Credit for the original theme goes to its creator(s).
+ */
+
+/*
+ * === Discord class hash cheat sheet ===
+ * Discord appends a build hash to its class names (e.g. chat_f75fb0) and the
+ * hash changes with updates. Classes from the same Discord module share one
+ * hash, so after an update inspect one element per group below and find &
+ * replace the old hash with the new one:
+ *
+ *   f75fb0  chat_, subtitleContainer_, threadSidebarOpen_, threadSidebarFloating_
+ *   133bf   container__ (the <main>)
+ *   9293f   container__ (the <section>), toolbar__
+ *   01ae2   chatLayerWrapper__
+ *   5e434   page__, base__, content__
+ *   c38106  bar_, trailing_, title_
+ *   49676   updateIconForeground__
+ *   bfe55a  videoControls_, topControls_
+ *   6e2b9   notice__
+ *   ef3116  itemsContainer_
+ *   dbd263  stack_
+ *   0b563   header__
+ *   6ec1a   topic__
+ *   1ac1c   searchBar__
+ */
+
+.visual-refresh {
     /* === VARIABLES === */
     --vr-header-snippet-top: 0px;
     --vr-header-snippet-server-padding: 0px;
@@ -98,8 +126,9 @@
     }
 
     /* === FALLBACKS === */
-    /* If no chat exists (e.g., friends tab), adjust title bar positioning */
-    :not(:has(div.page__5e434 > div.chat_f75fb0)) div.base__5e434 > div.bar_c38106 {
+    /* If no chat exists (e.g., friends tab), adjust title bar positioning.
+       Checked on div.base only, instead of on every element in the page. */
+    div.base__5e434:not(:has(div.page__5e434 > div.chat_f75fb0)) > div.bar_c38106 {
         right: 0 !important;
     }
 
