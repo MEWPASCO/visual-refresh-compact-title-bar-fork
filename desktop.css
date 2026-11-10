@@ -1,7 +1,7 @@
 /**
  * @name Visual Refresh Compact Title Bar
  * @author Wolfÿ
- * @version 1.1.4-Alpha
+ * @version 1.2.0-Alpha
  * @description A Discord theme to compact the new visual refresh title bar
  * @invite avia
  * @source https://github.com/MEWPASCO/visual-refresh-compact-title-bar-fork
@@ -14,26 +14,21 @@
  */
 
 /*
- * === Discord class hash cheat sheet ===
- * Discord appends a build hash to its class names (e.g. chat_f75fb0) and the
- * hash changes with updates. Classes from the same Discord module share one
- * hash, so after an update inspect one element per group below and find &
- * replace the old hash with the new one:
+ * === Class names ===
+ * Discord appends a build hash to its class names, and on 2026-11-10 the format
+ * changed (chat_f75fb0 -> chat_z_gUBg). Nothing below contains a hash any more.
  *
- *   f75fb0  chat_, subtitleContainer_, threadSidebarOpen_, threadSidebarFloating_
- *   133bf   container__ (the <main>)
- *   9293f   container__ (the <section>), toolbar__
- *   01ae2   chatLayerWrapper__
- *   5e434   page__, base__, content__
- *   c38106  bar_, trailing_, title_
- *   49676   updateIconForeground__
- *   bfe55a  videoControls_, topControls_
- *   6e2b9   notice__
- *   ef3116  itemsContainer_
- *   dbd263  stack_
- *   0b563   header__
- *   6ec1a   topic__
- *   1ac1c   searchBar__
+ *   :is([class^="x_"], [class*=" x_"])   a class that is exactly "x" + hash
+ *                                        (so "bar_" does not match "toolbar_")
+ *   [class*="x_"]                        a name distinctive enough to match as is
+ *
+ * checked   = confirmed against a DOM dump of 2026-11-10
+ * unchecked = name carried over from the old client; if it stops matching, the
+ *             part that depends on it silently does nothing
+ *
+ * Structure that changed in the same update: the chat is no longer a direct
+ * child of the page. It is page > div > chat, so "page > chat" became
+ * "page > div > chat".
  */
 
 .visual-refresh {
@@ -45,53 +40,59 @@
     --vr-top-spacing: 20px;
 
     /* === CHAT PADDING ADJUSTMENT === */
-    div.chat_f75fb0,
-    div.subtitleContainer_f75fb0,
-    main.container__133bf,
-    div.chatLayerWrapper__01ae2 {
-        & section.container__9293f {
+    /* checked: div.chat_z_gUBg, div.subtitleContainer_z_gUBg, main.chatContent_z_gUBg
+       (a <section> in a call), div.chatLayerWrapper_FrbQJp. The header is the
+       <section> that holds div.upperContainer_ (section.container_ybUK7Z). */
+    div:is([class^="chat_"], [class*=" chat_"]),
+    div:is([class^="subtitleContainer_"], [class*=" subtitleContainer_"]),
+    [class*="chatContent_"],
+    div[class*="chatLayerWrapper_"] {
+        & section:has(> [class*="upperContainer_"]) {
             padding-right: var(--vr-header-snippet-space);
         }
     }
 
     /* === PAGE ANCHOR SETUP === */
-    div.page__5e434 {
-        &:not(:has(> div.chat_f75fb0)) {
+    /* checked: div.page_pog62O > div > div.chat_z_gUBg */
+    div:is([class^="page_"], [class*=" page_"]) {
+        &:not(:has(> div > div:is([class^="chat_"], [class*=" chat_"]))) {
             anchor-name: --vr-header-snippet;
         }
 
-        & > div.chat_f75fb0 {
+        & > div > div:is([class^="chat_"], [class*=" chat_"]) {
             anchor-name: --vr-header-snippet;
         }
     }
 
     /* === BASE STRUCTURE ADJUSTMENTS === */
-    div.base__5e434 {
+    /* checked: div.base_pog62O holds div.content_pog62O. unchecked: that the top
+       bar and the notice are still its direct children. */
+    div:is([class^="base_"], [class*=" base_"]) {
         grid-template-rows: [top] var(--vr-top-spacing) [titleBarEnd] min-content [noticeEnd] 1fr [contentEnd] min-content [end];
 
         /* If update icon exists (like a Discord client update available) */
-        &:has(div.bar_c38106 > div.trailing_c38106 .updateIconForeground__49676) {
-            & div.chat_f75fb0,
-            & div.subtitleContainer_f75fb0,
-            & main.container__133bf,
-            & div.chatLayerWrapper__01ae2 {
-                & section.container__9293f {
+        &:has(div:is([class^="bar_"], [class*=" bar_"]) > div[class*="trailing_"] [class*="updateIconForeground_"]) {
+            & div:is([class^="chat_"], [class*=" chat_"]),
+            & div:is([class^="subtitleContainer_"], [class*=" subtitleContainer_"]),
+            & [class*="chatContent_"],
+            & div[class*="chatLayerWrapper_"] {
+                & section:has(> [class*="upperContainer_"]) {
                     padding-right: calc(var(--vr-header-snippet-space) + 50px);
                 }
             }
 
-            & div.videoControls_bfe55a .topControls_bfe55a div.toolbar__9293f {
+            & [class*="videoControls_"] [class*="topControls_"] [class*="toolbar_"] {
                 margin-right: calc(var(--vr-header-snippet-space) + 30px) !important;
             }
         }
 
         /* Content Layer */
-        & > div.content__5e434 {
+        & > div:is([class^="content_"], [class*=" content_"]) {
             z-index: 0;
         }
 
         /* Top Title Bar */
-        & > div.bar_c38106 {
+        & > div:is([class^="bar_"], [class*=" bar_"]) {
             position: absolute;
             position-anchor: --vr-header-snippet;
             top: var(--vr-header-snippet-top);
@@ -99,28 +100,28 @@
             width: anchor-size(width);
             padding: 0 var(--vr-header-snippet-button-padding) 0 0;
 
-            & > .title_c38106 {
+            & > :is([class^="title_"], [class*=" title_"]) {
                 display: none;
+            }
+
+            /* Trailing Buttons Styling (Inbox, Help) */
+            & > div[class*="trailing_"] {
+                background: none;
+                border: none;
+                height: var(--custom-channel-header-height);
+                top: var(--vr-top-spacing);
             }
         }
 
         /* Adjust Top Bar when Notice Appears */
-        &:has(> .notice__6e2b9) {
-            & > div.bar_c38106 {
+        &:has(> :is([class^="notice_"], [class*=" notice_"])) {
+            & > div:is([class^="bar_"], [class*=" bar_"]) {
                 top: anchor(top);
             }
         }
 
-        /* Trailing Buttons Styling (Inbox, Help) */
-        & div.trailing_c38106 {
-            background: none;
-            border: none;
-            height: var(--custom-channel-header-height);
-            top: var(--vr-top-spacing);
-        }
-
         /* Lower z-index if thread sidebar is open */
-        &:has(.threadSidebarOpen_f75fb0.threadSidebarFloating_f75fb0) > .bar_c38106 {
+        &:has([class*="threadSidebarOpen_"][class*="threadSidebarFloating_"]) > :is([class^="bar_"], [class*=" bar_"]) {
             z-index: 0;
         }
     }
@@ -128,30 +129,31 @@
     /* === FALLBACKS === */
     /* If no chat exists (e.g., friends tab), adjust title bar positioning.
        Checked on div.base only, instead of on every element in the page. */
-    div.base__5e434:not(:has(div.page__5e434 > div.chat_f75fb0)) > div.bar_c38106 {
+    div:is([class^="base_"], [class*=" base_"]):not(:has(div:is([class^="page_"], [class*=" page_"]) > div > div:is([class^="chat_"], [class*=" chat_"]))) > div:is([class^="bar_"], [class*=" bar_"]) {
         right: 0 !important;
     }
 
-    /* Adjust server list top margin */
-    ul[data-list-id="guildsnav"] > div.itemsContainer_ef3116 > div.stack_dbd263 {
+    /* Adjust server list top margin (unchecked) */
+    ul[data-list-id="guildsnav"] > [class*="itemsContainer_"] > :is([class^="stack_"], [class*=" stack_"]) {
         margin-top: var(--vr-header-snippet-server-padding);
     }
 
-    /* Disable drag on toolbar/video controls/topic */
-    & div.videoControls_bfe55a .topControls_bfe55a,
-    section.header__0b563 div.toolbar__9293f,
-    div.topic__6ec1a {
+    /* Disable drag on toolbar/video controls/topic (unchecked) */
+    & [class*="videoControls_"] [class*="topControls_"],
+    section:has(> [class*="upperContainer_"]) [class*="toolbar_"],
+    div:is([class^="topic_"], [class*=" topic_"]) {
         -webkit-app-region: no-drag;
     }
 
-    /* Move search bar to fit new layout */
-    div.searchBar__1ac1c {
+    /* Move search bar to fit new layout (unchecked). Limited to the chat header:
+       the DM list has its own div.searchBar_u88IQl that must not move. */
+    section:has(> [class*="upperContainer_"]) [class*="searchBar_"] {
         position: relative;
         right: var(--vr-header-snippet-space);
     }
 
     /* === UPDATE: Fix top bar size when notice appears === */
-    div.base__5e434:has(> .notice__6e2b9) {
+    div:is([class^="base_"], [class*=" base_"]):has(> :is([class^="notice_"], [class*=" notice_"])) {
         --vr-top-spacing: 0px !important;
     }
 }
